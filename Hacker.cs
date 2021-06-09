@@ -2,21 +2,30 @@ using System;
 
 namespace HeistPartII
 {
-    public class Hacker : Bank, IRobber 
+    public class Hacker : IRobber 
     
     {
         public string Name  { get; set; }
         public int SkillLevel { get; set; }
-        public int Percentagecut { get; set; }
+        public int PercentageCut { get; set; }
 
         public void PerformSkill(Bank bank)
         {
-            Console.WriteLine($"{Name} is hacking the {action}");
+            int SecurityScore = bank.AlarmScore - SkillLevel;
 
-            if (SecurityScore == 0)
+            Console.WriteLine($"{Name} is hacking the alarm system");
+
+            if (SecurityScore <= 0)
             {
                 Console.WriteLine($"{Name} has successfully disabled the alarm system!");
             }
+        }
+
+        public Hacker(string nameInput, int skillLevel, int percentageCut)
+        {
+            Name = nameInput;
+            SkillLevel = skillLevel;
+            PercentageCut = percentageCut;
         }
     }
 }

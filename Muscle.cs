@@ -2,21 +2,29 @@ using System;
 
 namespace HeistPartII
 {
-    public class Muscle : Bank, IRobber 
+    public class Muscle : IRobber 
     {
         
         public string Name  { get; set; }
         public int SkillLevel { get; set; }
-        public int Percentagecut { get; set; }
+        public int PercentageCut { get; set; }
 
         public void PerformSkill(Bank bank)
         {
-            Console.WriteLine($"{Name} is hacking the {action}");
+            int SecurityScore = bank.SecurityGuardScore - SkillLevel;
 
-            if (SecurityScore == 0)
+            Console.WriteLine($"{Name} is fighting the security guard");
+
+            if (SecurityScore <= 0)
             {
-                Console.WriteLine($"{Name} has successfully disabled the alarm system!");
+                Console.WriteLine($"{Name} has successfully beat up the security guard!");
             }
+        }
+        public Muscle(string nameInput, int skillLevel, int percentageCut)
+        {
+            Name = nameInput;
+            SkillLevel = skillLevel;
+            PercentageCut = percentageCut;
         }
     }
 }
